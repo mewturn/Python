@@ -2,7 +2,7 @@
 ## 50.021 Artificial Intelligence
 
 import numpy as np
-
+import time
 ## Weights
 w = np.zeros(3)
 
@@ -20,6 +20,8 @@ lr = 0.05
 ## Iteration count
 iteration = 0
 
+#################################### METHODS ###############################
+
 ## Adding an array to the list of arrays
 def addArray(list, x1, x2, x0=-1):
     x = np.array([x0,x1,x2])
@@ -35,8 +37,7 @@ def activation(w, x):
     output = 0
     
     ## Element-wise product of w and x
-    for i in range(len(x)):
-        output += w[i] * x[i]
+    output = np.dot(w,x)
     
     # Check if the modulus of g(z) is between -1 and 1
     if output < 1 and output > -1:
@@ -46,6 +47,9 @@ def activation(w, x):
         # Returns the sign of g(z) otherwise
         return np.sign(output)
         
+#################################### METHODS ###############################
+
+
 for i in range(len(x1_list)):
     x_list = addArray(x_list, x1_list[i], x2_list[i])
 
@@ -58,7 +62,7 @@ while True:
         predict = activation(w, x_list[i])
         
         ## Check if predictions are correct, otherwise we change w accordingly:
-        ## For positive ground truth, we want to more positive weights: 
+        ## For positive ground truth, we want more positive weights: 
         ## w[t+1] = w[t] + lr * x  
         if y_list[i] == 1:
             if predict < 1:
