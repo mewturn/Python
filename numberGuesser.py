@@ -23,13 +23,13 @@ def go(lower_bound, upper_bound, bots):
 
             if score < 0 and answer > lower_bound:
                 lower_bound = answer
-                print(f"Shifting lower bound to {lower_bound}")
+                print(f"Increasing lower bound to {lower_bound}")
 
             elif score > 0 and answer < upper_bound:
                 upper_bound = answer
-                print(f"Shifting upper bound to {upper_bound}")
+                print(f"Decreasing upper bound to {upper_bound}")
 
-            time.sleep(0.5)
+            # time.sleep(0.5)
 
         print(f"Searching in new range {lower_bound} to {upper_bound}")
         iterations += 1
