@@ -86,8 +86,26 @@ class OfflineCase:
 class Segment:
     def __init__(self, id, source, target):
         self.id = id
-        self.source = source
-        self.target = target
+        self.source = self.cleanStringForXML(source)
+        self.target = self.cleanStringForXML(target)
+        
+    def cleanStringForXML(self, text, reverse=False):
+        find_and_replace = {
+            "&": "&amp;",
+            "\"": "&quot;",
+            "'": "&apos;",
+            "<": "&lt;",
+            ">": "&gt;"
+        }
+        
+        text = str(text)
+        for k, v in find_and_replace.items():
+            if reverse:
+                text = text.replace(v, k)
+            else:
+                text = text.replace(k, v)
+
+        return text.strip()
         
 if __name__ == "__main__":
     import os
