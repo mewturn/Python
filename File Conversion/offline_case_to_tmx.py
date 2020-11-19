@@ -91,7 +91,17 @@ class Segment:
         
 if __name__ == "__main__":
     import os
-    for i in os.listdir():
-        if ".xlsx" in i:
-            offline_case = OfflineCase(i)
-            offline_case.convert("tmx")
+    import time
+
+    try:
+        for i in os.listdir():
+            if ".xlsx" in i:
+                start_time = time.time()
+                print(f"Processing file {i}")
+                offline_case = OfflineCase(i)
+                offline_case.convert("tmx")
+                elapsed_time = round(time.time() - start_time, 2)
+                print(f"Success! Completed in {elapsed_time} seconds.")
+        input("Task completed. Press <Enter> to close this window.")
+    except Exception as e:
+        input(f"An error occurred. {repr(e)}. Press <Enter> to close this window.")
