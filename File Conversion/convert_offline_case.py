@@ -92,14 +92,19 @@ class Segment:
 if __name__ == "__main__":
     import os
     import time
-
+    
+    ext_num = input("Select output format - [1]: TMX, [2]: XLIFF\nEnter number: ")
+    ext_map = {
+        "1": "tmx",
+        "2": "xliff"
+    }
     try:
         for i in os.listdir():
             if ".xlsx" in i:
                 start_time = time.time()
                 print(f"Processing file {i}")
                 offline_case = OfflineCase(i)
-                offline_case.convert("tmx")
+                offline_case.convert(ext_map[ext_num])
                 elapsed_time = round(time.time() - start_time, 2)
                 print(f"Success! Completed in {elapsed_time} seconds.")
         input("Task completed. Press <Enter> to close this window.")
