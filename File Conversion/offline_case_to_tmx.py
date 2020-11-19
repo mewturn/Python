@@ -55,7 +55,8 @@ class OfflineCase:
                 body += "</tuv>\n"
                 body += "<tuv xml:lang='en'>\n"
                 body += f"<seg>{segment.target}</seg>\n"
-                body += "</tuv>\n\n"
+                body += "</tuv>\n"
+                body += "</tu>\n\n"
                 
         footer = "</body>\n"
         footer += "</tmx>\n"
