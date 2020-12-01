@@ -1,0 +1,42 @@
+# successful
+if __name__ == "__main__":
+    import docx
+    import msvcrt
+    doc = docx.Document("C:/Users/user/Desktop/Test 1.docx")
+    text = ""
+    
+    # Parse
+    for paragraph in doc.paragraphs:
+        for run in paragraph.runs:
+            text += run.text
+        else:
+            text += "<///PARAGRAPH BREAK///>"
+    print(text)
+    text_arr = text.split("\n")
+
+    print("[Enter] Merge Lines\n[Any Other Key] Skip")
+
+    # Take input
+    remove_indices = []
+    for i in range(len(text_arr)-1):
+        print(f"Line 1: {text_arr[i]}")
+        print(f"Line 2: {text_arr[i+1]}")
+        c = msvcrt.getch()
+        if c == b'\r':
+            print("Merged")
+            remove_indices.append(i)
+        else:
+            print("Ignored")
+            
+
+    # Replace
+    br_count = -1
+    for paragraph in doc.paragraphs:
+        for run in paragraph.runs:
+            if "\n" in text:
+                br_count += 1
+                if br_count in remove_indices:
+                    run.text = run.text.replace("\n", "")
+                    remove_indices.pop(0)
+                    
+    doc.save("C:/Users/user/Desktop/Test 1 (out).docx")
